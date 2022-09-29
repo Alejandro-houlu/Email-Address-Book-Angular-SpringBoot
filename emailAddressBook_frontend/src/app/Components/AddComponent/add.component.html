@@ -1,0 +1,51 @@
+
+<form [formGroup]="addForm" (ngSubmit)="processForm();"  style="width: 50%; margin:auto;">
+
+    <mat-form-field appearance="fill" hintLabel="Max 50 characters" style="width: 100%;">
+        <mat-label>Name</mat-label>
+        <input type="text" #name name="name" id="name" placeholder="Ex. John Doe" maxlength="50" matInput formControlName="name">
+        <mat-hint align="end">{{name.value?.length || 0}}/50</mat-hint>
+        <mat-error>You must enter a name</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" hintLabel="Max 72 characters" style="width: 100% ;">
+        <mat-label>Email</mat-label>
+        <input type="email" name="email" id="email" #email placeholder="myemail@gmail.com" maxlength="72" matInput formControlName="email">
+        <mat-hint align="end">{{ email.value?.length || 0}}/72</mat-hint>
+        <mat-error>Please enter a valid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" hintLabel="Max 20 characters" style="width: 100% ;">
+        <mat-label>Phone</mat-label>
+        <input type="tel" name="mobile" id="mobile" placeholder="91234567" maxlength="20" matInput formControlName="mobile">
+        <mat-error>Please enter a mobile number</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100% ;">
+        <mat-label>Picture</mat-label>
+        <ngx-mat-file-input formControlName="profilePic">
+            <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+        </ngx-mat-file-input>
+        <mat-error>Upload a picture of You</mat-error>
+    </mat-form-field>
+
+    <ng-container formArrayName="hobbies">
+        <ng-container *ngFor="let hobbie of hobbyArray.controls;let i = index">
+            <ng-container [formGroupName]="i">
+                <div class="row mt-3">
+                    <mat-form-field style="width: 100%;">
+                        <input matInput placeholder="Enter hobbie #{{i}}" formControlName="hobby">
+                    </mat-form-field>
+                    <button type="button" mat-raised-button color="primary" style="margin-bottom: 10px; margin-right: 10px;" (click)="addHobby()"> + </button>
+                    <button type="button" mat-raised-button color="warn" *ngIf="i>0" (click)="removeHobby(i)"> - </button>
+                </div>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+
+
+    <button type="submit" mat-raised-button color="primary" [disabled]="addForm.invalid" style="margin-top:10px ;" >
+      Add
+    </button>
+
+</form>

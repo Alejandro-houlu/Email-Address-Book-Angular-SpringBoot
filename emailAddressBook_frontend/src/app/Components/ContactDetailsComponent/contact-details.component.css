@@ -1,0 +1,9 @@
+.contact-card {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.contact-header-image {
+  background-size: cover;
+}

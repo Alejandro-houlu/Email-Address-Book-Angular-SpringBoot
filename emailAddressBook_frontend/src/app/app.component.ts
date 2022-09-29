@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'emailAddressBook_frontend';
+  
+  @ViewChild(MatDrawer)
+  drawer!: MatDrawer
+
+  constructor() {}
+
+  ngOnInit(): void {
+  }
+
+  toggleSidebar() {
+    this.drawer.toggle()
+  }
 }
